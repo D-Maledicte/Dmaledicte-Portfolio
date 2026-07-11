@@ -1,0 +1,158 @@
+{
+  "global": {
+    "webName": "DMaledicte",
+    "copyright": "All rights reserved 2025",
+    "downloadCv": "Download CV",
+    "cvDownloaded": "CV downloaded",
+    "cvThanks": "Thanks for checking out my profile",
+    "learnMore": "View full case",
+    "comingSoon": "Coming Soon"
+  },
+  "sticky": {
+    "linkedin": "LinkedIn Profile",
+    "github": "GitHub Repository",
+    "email": "Send an email",
+    "emailRef": "You can write to me at:"
+  },
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "about": "About",
+    "contact": "Contact",
+    "availability": "Available for projects"
+  },
+  "hero": {
+    "tagline": "Systems architecture and automation.",
+    "tagline2": "Complex business logic converted into infrastructure that runs on its own.",
+    "subtitle": "I design CRM/ERP integrations, migrate automation pipelines, and build internal AI-powered tooling. I work with teams that need their systems to scale without scaling the team."
+  },
+  "home": {
+    "bio": {
+      "p1": "Automation and integration engineer with full technical ownership of CRM/ERP ecosystems. I design architecture — CQRS, hexagonal, idempotency, reconciliation — and execute from integration design through deployment.",
+      "p2": "I work with explicit patterns and documented conventions. The systems I deliver are operable and extensible without my constant involvement."
+    },
+    "skills": {
+      "label": "Skills",
+      "items": ["Logical reasoning", "Analytical", "Communicative", "Adaptability", "C1 English"]
+    },
+    "cases": {
+      "label": "Featured cases",
+      "viewCase": "View full case"
+    },
+    "cta": {
+      "projects": "View projects",
+      "contact": "Let's work together"
+    }
+  },
+  "stack": {
+    "label": "Stack",
+    "categories": {
+      "automation": "Integrations / Automation",
+      "ai": "AI / LLM",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "databases": "Databases",
+      "infra": "Infra / VPS"
+    },
+    "items": {
+      "automation": ["n8n", "Make", "Zoho CRM", "Zoho Catalyst", "Zoho Books"],
+      "ai": ["Claude API", "OpenAI API"],
+      "frontend": ["Vue 3", "PrimeVue 4", "Tailwind 4", "Quasar"],
+      "backend": ["Node.js", "Python", "COQL", "Deluge"],
+      "databases": ["PostgreSQL", "MongoDB"],
+      "infra": ["Docker", "Cloudflare", "VPS", "Zoho Functions", "API Gateway"]
+    }
+  },
+  "cases": {
+    "sectionLabel": "Case studies",
+    "labels": {
+      "problem": "Problem",
+      "approach": "Approach",
+      "impact": "Impact",
+      "stack": "Stack"
+    },
+    "case1": {
+      "title": "Multi-tenant read model over CRM — CQRS pattern",
+      "problem": "A CRM as the sole system of record doesn't scale for serving data to external portals, analytics agents, and clients without degrading the transactional core or exposing cross-tenant data.",
+      "approach": "Command/query separation: the CRM remains the system of record while a cloud data store serves as the dedicated read model. Event-driven ingestion with a single topology, API Gateway as the sole external boundary, tenant ID indexed at row level, watermark-based reconciliation for eventual consistency.",
+      "impact": "Portals and agents query without touching the CRM. Tenant isolation guaranteed at the data level. The transactional core handles zero external read load.",
+      "stack": "Zoho CRM · Zoho Catalyst (Data Store, Functions, API Gateway) · Node.js"
+    },
+    "case2": {
+      "title": "Automation migration from SaaS to self-hosted platform",
+      "problem": "Critical business flows — electronic invoicing, data normalization, scheduling — running on a low-code SaaS with variable per-task cost, growing lock-in, and no versioning capability.",
+      "approach": "Incremental migration to n8n, flow by flow, zero downtime. Includes redesigning a data normalization step with an LLM — abbreviation rules, accent normalization, structured fallbacks — and fixing bugs inherited from the previous platform's data wrapping.",
+      "impact": "Variable per-task cost eliminated. Full control over flow versioning and testing. Audit trail and rollback capability the previous platform didn't support.",
+      "stack": "n8n · OpenAI API · Zoho CRM · Zoho Books · AR fiscal APIs"
+    },
+    "case3": {
+      "title": "AI-assisted internal tooling for support and reporting",
+      "problem": "Operational knowledge — incidents, module behavior, CRM structure — lived in one person's head. First-level support escalated everything.",
+      "approach": "Custom conversational skills built on Claude: one for operational support with an incident knowledge base and a three-tier response system (documented match / partial match / declared inference), and one for reporting that generates structural and data analysis for any CRM module with corporate PDF output.",
+      "impact": "First-level support resolved without escalation. Reports that took hours now generated in minutes. Tacit knowledge converted into a queryable, auditable system.",
+      "stack": "Claude API · COQL · Python"
+    }
+  },
+  "projects": {
+    "sectionLabel": "Projects",
+    "secondary": {
+      "sectionLabel": "Other projects",
+      "items": [
+        {
+          "title": "URL shortener with integrated analytics",
+          "description": "Self-hosted URL shortener with click tracking integrated into the CRM. Access records feed in real time into the sales team's data pipeline.",
+          "stack": "n8n · Zoho CRM · Zoho Forms"
+        },
+        {
+          "title": "FIFO portfolio reconciliation",
+          "description": "Automated portfolio reconciliation system using FIFO methodology. Processes transactions, detects mismatches, and generates per-client status reports.",
+          "stack": "n8n · Zoho CRM"
+        },
+        {
+          "title": "Hexagonal patterns for CRM and automation",
+          "description": "Development framework for structuring business logic in CRM and automation platforms under hexagonal architecture. Separates domain, adapters, and ports to make flows testable and reusable.",
+          "stack": "Zoho CRM · n8n · Make"
+        },
+        {
+          "title": "Internal and external communication integration",
+          "description": "System that centralizes internal (Zoho Cliq) and external (Respondio) communication into the CRM, with routing rules and automatic interaction logging.",
+          "stack": "Zoho Cliq · Respondio · Zoho CRM"
+        },
+        {
+          "title": "Advanced filtering management table",
+          "description": "Nested table component with advanced filtering built with Quasar Framework, deployed in a portfolio management system for insurance producers.",
+          "stack": "Quasar Framework"
+        }
+      ]
+    }
+  },
+  "about": {
+    "bio": {
+      "p1": "Automation and integration engineer with full technical ownership of CRM/ERP ecosystems. I design architecture — CQRS, hexagonal, idempotency, reconciliation — and execute from integration design through deployment.",
+      "p2": "My deepest areas are critical business flow automation, platform responsibility separation — CRM as system of record, cloud data stores as the read layer — and internal tooling design that reduces dependence on tacit knowledge. I prefer systems the team can audit, version, and extend on their own.",
+      "p3": "Remote from Buenos Aires."
+    },
+    "certifications": {
+      "label": "Certifications",
+      "items": ["C1 English (EF SET)", "Codo a Codo 4.0", "Platzi"]
+    }
+  },
+  "contact": {
+    "text": "Tell me what you're working on — if there's a technical fit, we'll schedule a call.",
+    "legend": "Social",
+    "name": "Name",
+    "email": "Email",
+    "subject": "Subject",
+    "message": "Message",
+    "placeholders": {
+      "email": "youremail@example.com",
+      "subject": "What are you working on",
+      "message": "Give me some context"
+    },
+    "submit": "Send",
+    "toast": {
+      "success": "Message received — I'll reply within 24h.",
+      "error": "Something went wrong. Write to me directly at matiasjesusmartel@outlook.es"
+    }
+  }
+}

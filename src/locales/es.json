@@ -1,0 +1,158 @@
+{
+  "global": {
+    "webName": "DMaledicte",
+    "copyright": "Todos los derechos reservados 2025",
+    "downloadCv": "Descargar CV",
+    "cvDownloaded": "CV descargado",
+    "cvThanks": "Gracias por revisar mi perfil",
+    "learnMore": "Ver caso completo",
+    "comingSoon": "En construcción"
+  },
+  "sticky": {
+    "linkedin": "Perfil de LinkedIn",
+    "github": "Repositorio de GitHub",
+    "email": "Enviar un mail",
+    "emailRef": "Podés escribirme a:"
+  },
+  "nav": {
+    "home": "Inicio",
+    "projects": "Proyectos",
+    "about": "Sobre mí",
+    "contact": "Contacto",
+    "availability": "Disponible para proyectos"
+  },
+  "hero": {
+    "tagline": "Arquitectura de sistemas y automatización.",
+    "tagline2": "Lógica de negocio compleja convertida en infraestructura que opera sola.",
+    "subtitle": "Diseño integraciones CRM/ERP, migro flujos de automatización y construyo tooling interno asistido por IA. Trabajo con equipos que necesitan que sus sistemas escalen sin escalar el equipo."
+  },
+  "home": {
+    "bio": {
+      "p1": "Ingeniero de automatización e integraciones con ownership técnico sobre ecosistemas CRM/ERP completos. Diseño arquitectura — CQRS, hexagonal, idempotencia, reconciliación — y ejecuto desde la integración hasta el despliegue.",
+      "p2": "Trabajo con patrones explícitos y convenciones documentadas. Los sistemas que entrego son operables y extensibles sin mi intervención constante."
+    },
+    "skills": {
+      "label": "Habilidades",
+      "items": ["Razonamiento lógico", "Analítico", "Comunicativo", "Adaptabilidad", "Inglés C1"]
+    },
+    "cases": {
+      "label": "Casos destacados",
+      "viewCase": "Ver caso completo"
+    },
+    "cta": {
+      "projects": "Ver proyectos",
+      "contact": "Trabajemos juntos"
+    }
+  },
+  "stack": {
+    "label": "Stack",
+    "categories": {
+      "automation": "Integrations / Automation",
+      "ai": "AI / LLM",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "databases": "Databases",
+      "infra": "Infra / VPS"
+    },
+    "items": {
+      "automation": ["n8n", "Make", "Zoho CRM", "Zoho Catalyst", "Zoho Books"],
+      "ai": ["Claude API", "OpenAI API"],
+      "frontend": ["Vue 3", "PrimeVue 4", "Tailwind 4", "Quasar"],
+      "backend": ["Node.js", "Python", "COQL", "Deluge"],
+      "databases": ["PostgreSQL", "MongoDB"],
+      "infra": ["Docker", "Cloudflare", "VPS", "Zoho Functions", "API Gateway"]
+    }
+  },
+  "cases": {
+    "sectionLabel": "Casos de estudio",
+    "labels": {
+      "problem": "Problema",
+      "approach": "Enfoque",
+      "impact": "Impacto",
+      "stack": "Stack"
+    },
+    "case1": {
+      "title": "Read model multi-tenant sobre CRM — patrón CQRS",
+      "problem": "Un CRM como único sistema de registro no escala para servir datos a portales externos, agentes analíticos y clientes sin degradar el core transaccional ni exponer datos entre tenants.",
+      "approach": "Separación command/query: el CRM queda como system of record y un data store cloud actúa como modelo de lectura dedicado. Ingesta por eventos con topología única, API Gateway como único borde externo, tenant ID indexado a nivel de fila, reconciliación por watermark para consistencia eventual.",
+      "impact": "Portales y agentes consultan sin tocar el CRM. Aislamiento por tenant garantizado a nivel de datos. El core transaccional queda libre de carga de lectura externa.",
+      "stack": "Zoho CRM · Zoho Catalyst (Data Store, Functions, API Gateway) · Node.js"
+    },
+    "case2": {
+      "title": "Migración de automatización SaaS a plataforma self-hosted",
+      "problem": "Flujos críticos de negocio — facturación electrónica, normalización de datos, scheduling — corriendo sobre una plataforma low-code con costo variable por tarea, lock-in creciente y cero capacidad de versionado.",
+      "approach": "Migración incremental a n8n, flujo por flujo, sin downtime. Incluye rediseño de un paso de normalización con LLM — reglas de abreviación, normalización de acentos, fallbacks estructurados — y corrección de bugs heredados del wrapping de datos de la plataforma anterior.",
+      "impact": "Eliminación del costo variable por tarea. Control total del versionado y testing de flujos. Capacidad de auditoría y rollback que la plataforma anterior no permitía.",
+      "stack": "n8n · OpenAI API · Zoho CRM · Zoho Books · APIs fiscales AR"
+    },
+    "case3": {
+      "title": "Tooling interno asistido por IA para soporte y reporting",
+      "problem": "El conocimiento operativo — incidencias, comportamiento de módulos, estructura del CRM — vivía en una sola persona. El soporte de primer nivel escalaba todo.",
+      "approach": "Skills conversacionales a medida sobre Claude: una de soporte operativo con base de conocimiento de incidencias y sistema de respuesta en tres niveles (match documentado / match parcial / inferencia declarada), y otra de reporting que genera análisis estructural y de datos de cualquier módulo del CRM con salida en PDF corporativo.",
+      "impact": "Soporte de primer nivel resuelto sin escalar. Reportes que antes tomaban horas generados en minutos. El conocimiento tácito convertido en sistema consultable y auditable.",
+      "stack": "Claude API · COQL · Python"
+    }
+  },
+  "projects": {
+    "sectionLabel": "Proyectos",
+    "secondary": {
+      "sectionLabel": "Otros proyectos",
+      "items": [
+        {
+          "title": "URL shortener con analítica integrada",
+          "description": "URL shortener self-hosted con tracking de clics integrado al CRM. Los registros de acceso se vuelcan en tiempo real al pipeline de datos del equipo comercial.",
+          "stack": "n8n · Zoho CRM · Zoho Forms"
+        },
+        {
+          "title": "Conciliación de cartera FIFO",
+          "description": "Sistema de conciliación automática de carteras aplicando metodología FIFO. Procesa transacciones, detecta descalces y genera reportes de estado por cliente.",
+          "stack": "n8n · Zoho CRM"
+        },
+        {
+          "title": "Patrones hexagonales para CRM y automatización",
+          "description": "Framework de desarrollo para estructurar lógica de negocio en CRM y plataformas de automatización bajo arquitectura hexagonal. Separa dominio, adaptadores y puertos para que los flujos sean testeables y reutilizables.",
+          "stack": "Zoho CRM · n8n · Make"
+        },
+        {
+          "title": "Integración de comunicaciones interna y externa",
+          "description": "Sistema que centraliza comunicación interna (Zoho Cliq) y externa (Respondio) hacia el CRM, con reglas de enrutamiento y registro automático de interacciones.",
+          "stack": "Zoho Cliq · Respondio · Zoho CRM"
+        },
+        {
+          "title": "Tabla de gestión con filtrado avanzado",
+          "description": "Componente de tabla con anidamiento y filtrado avanzado construido en Quasar Framework, desplegado en un sistema de gestión de cartera para productores de seguros.",
+          "stack": "Quasar Framework"
+        }
+      ]
+    }
+  },
+  "about": {
+    "bio": {
+      "p1": "Ingeniero de automatización e integraciones con ownership técnico sobre ecosistemas CRM/ERP completos. Diseño arquitectura — CQRS, hexagonal, idempotencia, reconciliación — y ejecuto desde la integración hasta el despliegue.",
+      "p2": "Mis áreas de mayor profundidad son la automatización de flujos críticos de negocio, la separación de responsabilidades entre plataformas — CRM como system of record, data stores cloud como capa de lectura — y el diseño de tooling interno que reduce la dependencia del conocimiento tácito. Prefiero sistemas que el equipo pueda auditar, versionar y extender por su cuenta.",
+      "p3": "Trabajo remoto desde Buenos Aires."
+    },
+    "certifications": {
+      "label": "Certificaciones",
+      "items": ["C1 English (EF SET)", "Codo a Codo 4.0", "Platzi"]
+    }
+  },
+  "contact": {
+    "text": "Contame en qué estás trabajando — si hay match técnico, agendamos una llamada.",
+    "legend": "Redes",
+    "name": "Nombre",
+    "email": "Email",
+    "subject": "Asunto",
+    "message": "Mensaje",
+    "placeholders": {
+      "email": "tucorreo@ejemplo.com",
+      "subject": "En qué estás trabajando",
+      "message": "Contame el contexto"
+    },
+    "submit": "Enviar",
+    "toast": {
+      "success": "Mensaje recibido — te respondo en menos de 24h.",
+      "error": "Algo salió mal. Escribime directamente a matiasjesusmartel@outlook.es"
+    }
+  }
+}
