@@ -11,10 +11,10 @@ function changeLanguage() {
 }
 
 const navLinks = [
-  { key: 'nav.home', route: '/' },
-  { key: 'nav.projects', route: '/projects' },
-  { key: 'nav.about', route: '/about' },
-  { key: 'nav.contact', route: '/contact' },
+  { num: '01', key: 'nav.home', route: '/' },
+  { num: '02', key: 'nav.about', route: '/about' },
+  { num: '03', key: 'nav.projects', route: '/projects' },
+  { num: '04', key: 'nav.contact', route: '/contact' },
 ]
 
 const socialLinks = [
@@ -34,50 +34,53 @@ const socialLinks = [
         <!-- Logo -->
         <RouterLink
           to="/"
-          class="font-mono text-caption tracking-eyebrow uppercase text-text-primary hover:text-accent-navy transition-colors shrink-0"
+          class="font-mono text-body font-semibold text-text-primary hover:text-accent-green transition-colors no-underline shrink-0"
         >
-          DM_
+          dmaledicte<span class="text-accent-green">.cloud</span>
         </RouterLink>
 
-        <!-- Nav links (desktop) -->
-        <ul class="hidden md:flex items-center gap-6 list-none m-0 p-0">
-          <li v-for="link in navLinks" :key="link.route">
-            <RouterLink
-              :to="link.route"
-              class="font-mono text-caption tracking-eyebrow uppercase text-text-muted hover:text-text-primary transition-colors no-underline"
-              active-class="text-text-primary"
-              exact-active-class="text-accent-navy"
-            >
-              {{ $t(link.key) }}
-            </RouterLink>
-          </li>
-        </ul>
+        <!-- Right: nav links + controls -->
+        <div class="flex items-center gap-6">
 
-        <!-- Right controls -->
-        <div class="flex items-center gap-4 shrink-0">
-          <!-- Availability badge -->
-          <span class="hidden lg:flex items-center gap-1.5 font-mono text-caption tracking-eyebrow uppercase text-accent-green">
-            <span class="w-1.5 h-1.5 rounded-full bg-accent-green inline-block"></span>
-            {{ $t('nav.availability') }}
-          </span>
+          <!-- Nav links (desktop) -->
+          <ul class="hidden md:flex items-center gap-6 list-none m-0 p-0">
+            <li v-for="link in navLinks" :key="link.route">
+              <RouterLink
+                :to="link.route"
+                class="font-mono text-caption text-text-muted hover:text-accent-green transition-colors no-underline nav-link"
+                exact-active-class="nav-link--active"
+              >
+                <span class="text-accent-green">{{ link.num }}</span>
+                {{ ' ' + $t(link.key) }}
+              </RouterLink>
+            </li>
+          </ul>
 
-          <!-- i18n toggle -->
-          <button
-            @click="changeLanguage"
-            class="font-mono text-caption tracking-eyebrow uppercase text-text-muted hover:text-text-primary transition-colors cursor-pointer bg-transparent border-none p-0"
-            :aria-label="locale === 'es' ? 'Switch to English' : 'Cambiar a Español'"
-          >
-            {{ locale === 'es' ? 'EN' : 'ES' }}
-          </button>
+          <!-- Lang toggle pill -->
+          <div class="flex items-center font-mono text-caption border border-grid-line" role="group">
+            <button
+              @click="locale !== 'es' && changeLanguage()"
+              class="px-2 py-1 transition-colors cursor-pointer border-none"
+              :class="locale === 'es' ? 'bg-accent-green text-ink' : 'bg-transparent text-text-muted hover:text-text-primary'"
+              aria-label="Español"
+            >ES</button>
+            <button
+              @click="locale !== 'en' && changeLanguage()"
+              class="px-2 py-1 transition-colors cursor-pointer border-none"
+              :class="locale === 'en' ? 'bg-accent-green text-ink' : 'bg-transparent text-text-muted hover:text-text-primary'"
+              aria-label="English"
+            >EN</button>
+          </div>
 
           <!-- Dark/light toggle -->
           <button
             @click="toggleTheme"
-            class="text-text-muted hover:text-text-primary transition-colors cursor-pointer bg-transparent border-none p-0 flex items-center"
+            class="text-text-muted hover:text-accent-green transition-colors cursor-pointer bg-transparent border-none p-0 flex items-center"
             :aria-label="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
           >
             <i :class="theme === 'dark' ? 'pi pi-sun' : 'pi pi-moon'" class="text-sm" />
           </button>
+
         </div>
       </div>
     </nav>
@@ -126,3 +129,9 @@ const socialLinks = [
 
   </div>
 </template>
+
+<style scoped>
+.nav-link--active {
+  color: var(--color-text-primary);
+}
+</style>

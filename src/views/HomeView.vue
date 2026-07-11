@@ -76,35 +76,58 @@ const stackCategories = [
 
       <!-- Left: copy -->
       <div class="flex flex-col gap-6 min-w-0">
-        <span class="font-mono text-caption tracking-eyebrow uppercase text-accent-green break-words">
-          {{ $t('global.webName') }}
-          <span class="hidden sm:inline">— SISTEMAS · AUTOMATIZACIÓN · IA</span>
+
+        <!-- Eyebrow: code comment syntax -->
+        <span class="font-mono text-caption text-accent-green">
+          // arquitectura de sistemas — buenos aires, ar
         </span>
 
+        <!-- Headline -->
         <h1 class="font-sans font-semibold m-0 text-text-primary break-words" style="font-size: clamp(1.75rem, 4vw, 2.75rem); line-height: 1.15;">
           {{ $t('hero.tagline') }}
           <br />
-          <span class="text-text-muted">{{ $t('hero.tagline2') }}</span>
+          <span class="text-text-muted" style="font-style: italic; font-weight: 400;">{{ $t('hero.tagline2') }}</span>
         </h1>
 
+        <!-- Subtitle -->
         <p class="font-sans text-body text-text-muted m-0 max-w-lg leading-relaxed break-words">
           {{ $t('hero.subtitle') }}
         </p>
 
-        <div class="flex flex-wrap gap-3 pt-2">
+        <!-- CTAs + social links inline -->
+        <div class="flex flex-wrap items-center gap-4 pt-2">
           <RouterLink
             to="/projects"
-            class="font-mono text-caption tracking-eyebrow uppercase px-5 py-2.5 bg-accent-navy text-text-primary no-underline hover:bg-opacity-80 transition-colors"
+            class="font-mono text-caption tracking-eyebrow uppercase px-5 py-2.5 bg-accent-green text-ink no-underline hover:opacity-90 transition-opacity"
           >
-            {{ $t('home.cta.projects') }}
+            {{ $t('home.cta.projects') }} →
           </RouterLink>
           <RouterLink
             to="/contact"
-            class="font-mono text-caption tracking-eyebrow uppercase px-5 py-2.5 border border-grid-line text-text-muted no-underline hover:border-accent-navy hover:text-text-primary transition-colors"
+            class="font-mono text-caption tracking-eyebrow uppercase px-5 py-2.5 border border-grid-line text-text-muted no-underline hover:border-accent-green hover:text-text-primary transition-colors"
           >
             {{ $t('home.cta.contact') }}
           </RouterLink>
+
+          <!-- Social links inline -->
+          <div class="flex items-center gap-4 ml-2">
+            <a
+              href="https://www.linkedin.com/in/mjmartel/"
+              target="_blank" rel="noopener noreferrer"
+              class="font-mono text-caption text-text-muted hover:text-accent-green transition-colors no-underline"
+            >LinkedIn</a>
+            <a
+              href="https://github.com/D-Maledicte"
+              target="_blank" rel="noopener noreferrer"
+              class="font-mono text-caption text-text-muted hover:text-accent-green transition-colors no-underline"
+            >GitHub</a>
+            <a
+              href="mailto:matiasjesusmartel@outlook.es"
+              class="font-mono text-caption text-text-muted hover:text-accent-green transition-colors no-underline"
+            >Mail</a>
+          </div>
         </div>
+
       </div>
 
       <!-- Right: diagrama de arquitectura SVG -->
