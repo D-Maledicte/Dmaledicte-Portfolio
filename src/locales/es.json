@@ -65,6 +65,7 @@
   },
   "cases": {
     "sectionLabel": "Casos de estudio",
+    "callToAction": "Trabajo privado genericado — disponible para ampliar detalles en una llamada.",
     "labels": {
       "problem": "Problema",
       "approach": "Enfoque",
@@ -72,6 +73,7 @@
       "stack": "Stack"
     },
     "case1": {
+      "context": "Empresa de servicios financieros · operación multi-organización",
       "title": "Read model multi-tenant sobre CRM — patrón CQRS",
       "problem": "Un CRM como único sistema de registro no escala para servir datos a portales externos, agentes analíticos y clientes sin degradar el core transaccional ni exponer datos entre tenants.",
       "approach": "Separación command/query: el CRM queda como system of record y un data store cloud actúa como modelo de lectura dedicado. Ingesta por eventos con topología única, API Gateway como único borde externo, tenant ID indexado a nivel de fila, reconciliación por watermark para consistencia eventual.",
@@ -79,6 +81,7 @@
       "stack": "Zoho CRM · Zoho Catalyst (Data Store, Functions, API Gateway) · Node.js"
     },
     "case2": {
+      "context": "Automatización de negocio · migración SaaS a self-hosted",
       "title": "Migración de automatización SaaS a plataforma self-hosted",
       "problem": "Flujos críticos de negocio — facturación electrónica, normalización de datos, scheduling — corriendo sobre una plataforma low-code con costo variable por tarea, lock-in creciente y cero capacidad de versionado.",
       "approach": "Migración incremental a n8n, flujo por flujo, sin downtime. Incluye rediseño de un paso de normalización con LLM — reglas de abreviación, normalización de acentos, fallbacks estructurados — y corrección de bugs heredados del wrapping de datos de la plataforma anterior.",
@@ -86,6 +89,7 @@
       "stack": "n8n · OpenAI API · Zoho CRM · Zoho Books · APIs fiscales AR"
     },
     "case3": {
+      "context": "Equipo operativo · soporte y reporting internos",
       "title": "Tooling interno asistido por IA para soporte y reporting",
       "problem": "El conocimiento operativo — incidencias, comportamiento de módulos, estructura del CRM — vivía en una sola persona. El soporte de primer nivel escalaba todo.",
       "approach": "Skills conversacionales a medida sobre Claude: una de soporte operativo con base de conocimiento de incidencias y sistema de respuesta en tres niveles (match documentado / match parcial / inferencia declarada), y otra de reporting que genera análisis estructural y de datos de cualquier módulo del CRM con salida en PDF corporativo.",
@@ -95,6 +99,7 @@
   },
   "projects": {
     "sectionLabel": "Proyectos",
+    "intro": "Tres sistemas resueltos. Cada caso muestra el patrón técnico empleado, sin revelar información sensible del cliente.",
     "secondary": {
       "sectionLabel": "Otros proyectos",
       "items": [

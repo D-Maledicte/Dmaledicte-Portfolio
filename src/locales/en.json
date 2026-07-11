@@ -65,6 +65,7 @@
   },
   "cases": {
     "sectionLabel": "Case studies",
+    "callToAction": "Private genericized work — available to discuss details in a call.",
     "labels": {
       "problem": "Problem",
       "approach": "Approach",
@@ -72,6 +73,7 @@
       "stack": "Stack"
     },
     "case1": {
+      "context": "Financial services company · multi-organization operation",
       "title": "Multi-tenant read model over CRM — CQRS pattern",
       "problem": "A CRM as the sole system of record doesn't scale for serving data to external portals, analytics agents, and clients without degrading the transactional core or exposing cross-tenant data.",
       "approach": "Command/query separation: the CRM remains the system of record while a cloud data store serves as the dedicated read model. Event-driven ingestion with a single topology, API Gateway as the sole external boundary, tenant ID indexed at row level, watermark-based reconciliation for eventual consistency.",
@@ -79,6 +81,7 @@
       "stack": "Zoho CRM · Zoho Catalyst (Data Store, Functions, API Gateway) · Node.js"
     },
     "case2": {
+      "context": "Business automation · SaaS to self-hosted migration",
       "title": "Automation migration from SaaS to self-hosted platform",
       "problem": "Critical business flows — electronic invoicing, data normalization, scheduling — running on a low-code SaaS with variable per-task cost, growing lock-in, and no versioning capability.",
       "approach": "Incremental migration to n8n, flow by flow, zero downtime. Includes redesigning a data normalization step with an LLM — abbreviation rules, accent normalization, structured fallbacks — and fixing bugs inherited from the previous platform's data wrapping.",
@@ -86,6 +89,7 @@
       "stack": "n8n · OpenAI API · Zoho CRM · Zoho Books · AR fiscal APIs"
     },
     "case3": {
+      "context": "Operations team · internal support and reporting",
       "title": "AI-assisted internal tooling for support and reporting",
       "problem": "Operational knowledge — incidents, module behavior, CRM structure — lived in one person's head. First-level support escalated everything.",
       "approach": "Custom conversational skills built on Claude: one for operational support with an incident knowledge base and a three-tier response system (documented match / partial match / declared inference), and one for reporting that generates structural and data analysis for any CRM module with corporate PDF output.",
@@ -95,6 +99,7 @@
   },
   "projects": {
     "sectionLabel": "Projects",
+    "intro": "Three solved systems. Each case shows the technical pattern applied, without exposing client-sensitive information.",
     "secondary": {
       "sectionLabel": "Other projects",
       "items": [
