@@ -71,7 +71,7 @@ const cvDownload = (title, greeting) => {
               <div class="flex flex-row justify-content-center sm:w-5 ">
                 <Image alt="Image">
                   <template #image>
-                      <img src="/src/assets/ProfilePïc.png" alt="image" class="h-30rem"/>
+                      <img src="/src/assets/profile-pic.png" alt="image" class="h-30rem"/>
                   </template>
               </Image>
               </div>
