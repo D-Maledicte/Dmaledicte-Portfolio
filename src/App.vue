@@ -1,176 +1,128 @@
 <script setup>
-import { ref } from 'vue';
-import { RouterLink ,RouterView } from 'vue-router'
-import { useI18n } from 'vue-i18n';
+import { useI18n } from 'vue-i18n'
+import { RouterLink, RouterView } from 'vue-router'
+import { useTheme } from '@/composables/useTheme'
 
-const { locale } = useI18n();
+const { locale } = useI18n()
+const { theme, toggle: toggleTheme } = useTheme()
 
-const changeLanguage = () => {
-  locale.value == 'en' ? locale.value = 'es' : locale.value = 'en'
-};
+function changeLanguage() {
+  locale.value = locale.value === 'es' ? 'en' : 'es'
+}
 
-const langValue = ref(locale.value);
-const langOptions = ref(['es','en']);
+const navLinks = [
+  { key: 'nav.home', route: '/' },
+  { key: 'nav.projects', route: '/projects' },
+  { key: 'nav.about', route: '/about' },
+  { key: 'nav.contact', route: '/contact' },
+]
 
-const items = ref([
-  {
-    label: 'navBar[0]',
-    icon: 'pi pi-home',
-    route: '/'
-  },
-  {
-    label: 'navBar[1]',
-    icon: 'pi pi-user',
-    route: '/about'
-  },
-  {
-    label: 'navBar[2]',
-    icon: 'pi pi-briefcase',
-    route: '/projects'
-  },
-  {
-    label: 'navBar[3]',
-    icon: 'pi pi-comment',
-    route: '/contact'
-  },
-]);
-
-const stickyItems = ref([
-  {
-    label: 'LinkedIn',
-    icon: 'pi pi-linkedin',
-    link: 'https://www.linkedin.com/in/mjmartel/',
-    tooltip: 'stickyTooltip'
-  },
-  {
-    label: 'Github',
-    icon: 'pi pi-github',
-    link: 'https://github.com/D-Maledicte',
-    tooltip: 'stickyTooltip'
-  },
-  {
-    label: 'Mail',
-    icon: 'pi pi-envelope',
-    link: 'mailto:martelmatiasjesus@gmail.com',
-    tooltip: 'stickyTooltip'
-  }
-]);
-//no hay clase//menos de 576 es smartphone
-//sm//entre 576 y 770 es tablet
-//md//entre 770 y 990 es notebook
-//lg//entre 990 y 1200 es monitor chico
-//xl//arriba de 1200 es tamaño decente y respetable
+const socialLinks = [
+  { label: 'LinkedIn', icon: 'pi pi-linkedin', href: 'https://www.linkedin.com/in/mjmartel/', titleKey: 'sticky.linkedin' },
+  { label: 'GitHub', icon: 'pi pi-github', href: 'https://github.com/D-Maledicte', titleKey: 'sticky.github' },
+  { label: 'Mail', icon: 'pi pi-envelope', href: 'mailto:matiasjesusmartel@outlook.es', titleKey: 'sticky.email' },
+]
 </script>
 
 <template>
-  <div class="flex flex-column align-items-center sm:justify-content-center justify-content-between">
-    <div class="hidden lg:flex flex-column justify-content-center align-items-center fixed left-0 px-2 py-4 w-1 font-bold">
-      <div class="border-left-2  border-white stickyPanel h-25rem"></div>      
-      <div class="flex flex-column">
-        <a v-tooltip="$t(`${item.tooltip}[${index}]`)" v-for="(item, index) in stickyItems" :key="item.label" :href="item.link" :to="item.link" target="_blank">
-          <i  :class="item.icon"  class="cursor-pointer m-2 text-3xl text-primary sticky-icons"/>
-        </a>
-      </div>
-    </div>
-    <header class="flex align-items-center justify-content-center lg:header xl:w-9 w-full md:h-auto">
-      <div class="flex flex-row justify-content-between align-items-center w-full ">
-        <Card class="lg:w-3 md:w-4 sm:w-5 w-6 flex justify-content-center align-items-center h-3rem hover:text-primary shadow-4 ">
-          <template #content><i class="pi pi-qrcode mr-2"/>{{ $t('webName') }}</template>
-        </Card>
-        <div class="max-w-max xl:w-7 lg:w-7 md:w-3 sm:w-3 w-5 flex justify-content-center hover:text-primary">
-          <Menubar :model="items" class="flex justify-content-center w-full">
-            <template #item="{ item, props}">
-                  <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route"  custom>
-                      <a v-ripple :href="href" v-bind="props.action" @click="navigate" >
-                          <span :class="item.icon" class="icon" />
-                          <span class="hover:text-primary">{{ $t(item.label) }}</span>
-                      </a>
-                  </router-link>
-                  
-            </template>
-            <template #end>
-              <div class="flex align-items-center">
-                <SelectButton v-model="langValue" :options="langOptions" @update:modelValue="changeLanguage" aria-labelledby="basic" :allowEmpty=false />
-              </div>
-            </template>
-          </Menubar>
+  <div class="min-h-screen flex flex-col bg-ink text-text-primary overflow-x-hidden">
+
+    <!-- ── Nav ─────────────────────────────────────────────────── -->
+    <nav class="sticky top-0 z-50 bg-ink border-b border-grid-line">
+      <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between gap-6">
+
+        <!-- Logo -->
+        <RouterLink
+          to="/"
+          class="font-mono text-caption tracking-eyebrow uppercase text-text-primary hover:text-accent-navy transition-colors shrink-0"
+        >
+          DM_
+        </RouterLink>
+
+        <!-- Nav links (desktop) -->
+        <ul class="hidden md:flex items-center gap-6 list-none m-0 p-0">
+          <li v-for="link in navLinks" :key="link.route">
+            <RouterLink
+              :to="link.route"
+              class="font-mono text-caption tracking-eyebrow uppercase text-text-muted hover:text-text-primary transition-colors no-underline"
+              active-class="text-text-primary"
+              exact-active-class="text-accent-navy"
+            >
+              {{ $t(link.key) }}
+            </RouterLink>
+          </li>
+        </ul>
+
+        <!-- Right controls -->
+        <div class="flex items-center gap-4 shrink-0">
+          <!-- Availability badge -->
+          <span class="hidden lg:flex items-center gap-1.5 font-mono text-caption tracking-eyebrow uppercase text-accent-green">
+            <span class="w-1.5 h-1.5 rounded-full bg-accent-green inline-block"></span>
+            {{ $t('nav.availability') }}
+          </span>
+
+          <!-- i18n toggle -->
+          <button
+            @click="changeLanguage"
+            class="font-mono text-caption tracking-eyebrow uppercase text-text-muted hover:text-text-primary transition-colors cursor-pointer bg-transparent border-none p-0"
+            :aria-label="locale === 'es' ? 'Switch to English' : 'Cambiar a Español'"
+          >
+            {{ locale === 'es' ? 'EN' : 'ES' }}
+          </button>
+
+          <!-- Dark/light toggle -->
+          <button
+            @click="toggleTheme"
+            class="text-text-muted hover:text-text-primary transition-colors cursor-pointer bg-transparent border-none p-0 flex items-center"
+            :aria-label="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+          >
+            <i :class="theme === 'dark' ? 'pi pi-sun' : 'pi pi-moon'" class="text-sm" />
+          </button>
         </div>
       </div>
-      
-    </header>
-    <RouterView class="w-full routerComp xl:mt-3 md:mt-3 sm:mt-2 mt-3 flex align-items-center justify-content-center "/>
-    <footer class="xl:footer md:w-full sm:w-full h-5rem sm:mt-0 mt-3 flex sm:flex-row flex-column md:align-items-center sm:align-items-end justify-content-between">
-      <div class="flex md:w-7 md:ml-2 sm:flex-row flex-column lg:justify-content-center lg:justify-content-between xl:justify-content-start align-items-center sm:gap-0 gap-1">
-        <span class="md:text-base sm:text-xs">
-        {{ $t('emailReference')}}
-        </span>  
-        <a href="mailto:martelmatiasjesus@gmail.com" target="_blank" class="sm:ml-2">
-          <Chip class="py-0 pl-0 pr-3 w-full">
-            <span class="bg-primary border-circle sm:w-1rem sm:h-1rem w-2rem h-2rem flex align-items-center justify-content-center">M</span>
-            <span class="ml-2 md:text-base sm:text-xs font-medium">martelmatiasjesus@gmail.com</span>
-          </Chip>
-        </a>
-      </div>
-      <div class="md:w-5 flex sm:justify-content-end justify-content-center sm:align-items-center align-items-end">
-        <span class="md:text-base md:mr-2 sm:text-xs">
-          DMaledicte©{{$t('copyright')}}
+    </nav>
+
+    <!-- ── Main content ───────────────────────────────────────── -->
+    <main class="flex-1">
+      <RouterView />
+    </main>
+
+    <!-- ── Footer ─────────────────────────────────────────────── -->
+    <footer class="border-t border-grid-line">
+      <div class="max-w-6xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+
+        <!-- Social links + mail -->
+        <div class="flex flex-col gap-3">
+          <span class="font-mono text-caption tracking-eyebrow uppercase text-text-muted">
+            {{ $t('sticky.emailRef') }}
+          </span>
+          <a
+            href="mailto:matiasjesusmartel@outlook.es"
+            class="font-mono text-caption text-text-primary hover:text-accent-navy transition-colors no-underline"
+          >
+            matiasjesusmartel@outlook.es
+          </a>
+          <div class="flex items-center gap-4">
+            <a
+              v-for="link in socialLinks"
+              :key="link.label"
+              :href="link.href"
+              :title="$t(link.titleKey)"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-text-muted hover:text-text-primary transition-colors no-underline"
+            >
+              <i :class="link.icon" class="text-base" />
+            </a>
+          </div>
+        </div>
+
+        <!-- Copyright -->
+        <span class="font-mono text-caption text-text-muted">
+          DMaledicte © {{ $t('global.copyright') }}
         </span>
       </div>
     </footer>
+
   </div>
 </template>
-
-<style scoped>
-
-.stickyMedia{
-  left: 0px;
-  top: 0px
-}
-
-.stickyPanel{
-  width: 1px;
-}
-.sticky-icons {
-  transition: transform 0.7s ease;
-}
-.sticky-icons:hover {
-  transform: scale(1.1);
-}
-.header {
-  height: 10vh;
-  /*
-  width: 70%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  */
-}
-.header-section {
-  width: 100%;
-  /*
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  */
-}
-.icon {
-  margin-right: 1rem;
-}
-
-.routerComp {
-  min-height: 78vh;
-  height: 80vh;
-}
-
-.footer {
-  height: 10vh;
-  /*
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 70%;
-  */
-}
-
-
-</style>
