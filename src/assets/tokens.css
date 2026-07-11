@@ -1,1 +1,58 @@
-/* Design tokens — se completan en E1 */
+@theme {
+  /* ─── Colors — dark defaults ──────────────────────────────── */
+  --color-ink: #0C0D0F;
+  --color-surface: #13151A;
+  --color-grid-line: #1C2230;
+  --color-text-primary: #F0F2F5;
+  --color-text-muted: #7A8998;
+  --color-accent-navy: #2B5FAC;
+  --color-accent-green: #52735A;
+
+  /* ─── Typography ─────────────────────────────────────────── */
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+
+  /* ─── Type scale ─────────────────────────────────────────── */
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1rem;
+  --text-body: 1rem;
+  --text-body--line-height: 1.625rem;
+  --text-lead: 1.25rem;
+  --text-lead--line-height: 1.875rem;
+  --text-heading: 1.75rem;
+  --text-heading--line-height: 2.25rem;
+  --text-display: 2.75rem;
+  --text-display--line-height: 3.25rem;
+
+  /* ─── Letter spacing ─────────────────────────────────────── */
+  --tracking-eyebrow: 0.15em;
+}
+
+/* ─── Light mode: OS preference (no manual selection) ──────── */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --color-ink: #F4F2EE;
+    --color-surface: #EDECEA;
+    --color-grid-line: #C8C4BC;
+    --color-text-primary: #0C0D0F;
+    --color-text-muted: #5A6272;
+  }
+}
+
+/* ─── Light mode: user forced light ────────────────────────── */
+:root[data-theme="light"] {
+  --color-ink: #F4F2EE;
+  --color-surface: #EDECEA;
+  --color-grid-line: #C8C4BC;
+  --color-text-primary: #0C0D0F;
+  --color-text-muted: #5A6272;
+}
+
+/* ─── Dark mode: user forced dark ──────────────────────────── */
+:root[data-theme="dark"] {
+  --color-ink: #0C0D0F;
+  --color-surface: #13151A;
+  --color-grid-line: #1C2230;
+  --color-text-primary: #F0F2F5;
+  --color-text-muted: #7A8998;
+}

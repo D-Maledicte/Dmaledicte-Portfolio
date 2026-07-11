@@ -1,5 +1,8 @@
 import 'primeicons/primeicons.css'
-import '@/assets/tokens.css'
+import '@fontsource/ibm-plex-mono/400.css'
+import '@fontsource/ibm-plex-mono/500.css'
+import '@fontsource/ibm-plex-sans/400.css'
+import '@fontsource/ibm-plex-sans/600.css'
 import '@/assets/app.css'
 
 import { createApp } from 'vue'
