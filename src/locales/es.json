@@ -132,6 +132,9 @@
     }
   },
   "about": {
+    "sectionLabel": "Sobre mí",
+    "availability": "Disponible para proyectos de integración y automatización.",
+    "photoLabel": "foto de perfil",
     "bio": {
       "p1": "Ingeniero de automatización e integraciones con ownership técnico sobre ecosistemas CRM/ERP completos. Diseño arquitectura — CQRS, hexagonal, idempotencia, reconciliación — y ejecuto desde la integración hasta el despliegue.",
       "p2": "Mis áreas de mayor profundidad son la automatización de flujos críticos de negocio, la separación de responsabilidades entre plataformas — CRM como system of record, data stores cloud como capa de lectura — y el diseño de tooling interno que reduce la dependencia del conocimiento tácito. Prefiero sistemas que el equipo pueda auditar, versionar y extender por su cuenta.",
@@ -143,12 +146,18 @@
     }
   },
   "contact": {
+    "sectionLabel": "Contacto",
+    "availability": "Disponible para proyectos de integración y automatización — respondo en menos de 24h.",
     "text": "Contame en qué estás trabajando — si hay match técnico, agendamos una llamada.",
     "legend": "Redes",
     "name": "Nombre",
     "email": "Email",
     "subject": "Asunto",
+    "subjectPlaceholder": "Tipo de consulta",
+    "subjects": ["Proyecto nuevo", "Consultoría técnica", "Otro"],
     "message": "Mensaje",
+    "fieldRequired": "Campo requerido",
+    "fieldEmail": "Email inválido",
     "placeholders": {
       "email": "tucorreo@ejemplo.com",
       "subject": "En qué estás trabajando",

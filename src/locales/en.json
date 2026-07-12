@@ -132,6 +132,9 @@
     }
   },
   "about": {
+    "sectionLabel": "About",
+    "availability": "Available for integration and automation projects.",
+    "photoLabel": "profile photo",
     "bio": {
       "p1": "Automation and integration engineer with full technical ownership of CRM/ERP ecosystems. I design architecture — CQRS, hexagonal, idempotency, reconciliation — and execute from integration design through deployment.",
       "p2": "My deepest areas are critical business flow automation, platform responsibility separation — CRM as system of record, cloud data stores as the read layer — and internal tooling design that reduces dependence on tacit knowledge. I prefer systems the team can audit, version, and extend on their own.",
@@ -143,12 +146,18 @@
     }
   },
   "contact": {
+    "sectionLabel": "Contact",
+    "availability": "Available for integration and automation projects — I reply within 24h.",
     "text": "Tell me what you're working on — if there's a technical fit, we'll schedule a call.",
     "legend": "Social",
     "name": "Name",
     "email": "Email",
     "subject": "Subject",
+    "subjectPlaceholder": "Type of inquiry",
+    "subjects": ["New project", "Technical consulting", "Other"],
     "message": "Message",
+    "fieldRequired": "Required field",
+    "fieldEmail": "Invalid email",
     "placeholders": {
       "email": "youremail@example.com",
       "subject": "What are you working on",
