@@ -88,16 +88,16 @@ const certifications = [
         <!-- Right: Photo placeholder + CV -->
         <div class="flex flex-col gap-6">
 
-          <!-- Photo placeholder -->
+          <!-- Profile photo -->
           <BlueprintCard>
             <span class="font-mono text-caption tracking-eyebrow uppercase text-accent-green block mb-4">
               // {{ $t('about.photoLabel') }}
             </span>
-            <div class="w-full aspect-square bg-ink border border-grid-line flex items-center justify-center">
-              <span class="font-mono text-caption text-text-muted text-center px-4 leading-relaxed">
-                [ foto próximamente ]
-              </span>
-            </div>
+            <img
+              src="@/assets/profile-pic.png"
+              :alt="$t('about.photoAlt')"
+              class="w-full aspect-square object-cover object-top border border-grid-line"
+            />
           </BlueprintCard>
 
           <!-- CV Download -->
@@ -108,18 +108,22 @@ const certifications = [
             <div class="flex flex-col gap-3">
 
               <!-- Lang toggle -->
-              <div class="flex border border-grid-line w-fit">
+              <div class="flex border border-grid-line w-fit" role="group" aria-label="Idioma del CV">
                 <button
+                  type="button"
                   @click="cvLang = 'es'"
                   class="font-mono text-caption px-4 py-2 transition-colors cursor-pointer border-none"
                   :class="cvLang === 'es' ? 'bg-accent-navy text-text-primary' : 'bg-transparent text-text-muted hover:text-text-primary'"
+                  aria-label="CV en español"
                 >
                   ES
                 </button>
                 <button
+                  type="button"
                   @click="cvLang = 'en'"
                   class="font-mono text-caption px-4 py-2 transition-colors cursor-pointer border-none"
                   :class="cvLang === 'en' ? 'bg-accent-navy text-text-primary' : 'bg-transparent text-text-muted hover:text-text-primary'"
+                  aria-label="CV in English"
                 >
                   EN
                 </button>
@@ -127,6 +131,7 @@ const certifications = [
 
               <!-- Download button -->
               <button
+                type="button"
                 @click="downloadCv"
                 class="font-mono text-caption tracking-eyebrow uppercase px-5 py-2.5 border border-grid-line text-text-muted hover:border-accent-green hover:text-text-primary transition-colors text-left cursor-pointer bg-transparent w-full"
               >

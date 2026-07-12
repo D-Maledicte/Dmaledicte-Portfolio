@@ -28,7 +28,7 @@ const socialLinks = [
   <div class="min-h-screen flex flex-col bg-ink text-text-primary overflow-x-hidden">
 
     <!-- ── Nav ─────────────────────────────────────────────────── -->
-    <nav class="sticky top-0 z-50 bg-ink border-b border-grid-line">
+    <nav class="sticky top-0 z-50 bg-ink border-b border-grid-line" aria-label="Navegación principal">
       <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between gap-6">
 
         <!-- Logo -->
@@ -57,14 +57,16 @@ const socialLinks = [
           </ul>
 
           <!-- Lang toggle pill -->
-          <div class="flex items-center font-mono text-caption border border-grid-line" role="group">
+          <div class="flex items-center font-mono text-caption border border-grid-line" role="group" aria-label="Idioma">
             <button
+              type="button"
               @click="locale !== 'es' && changeLanguage()"
               class="px-2 py-1 transition-colors cursor-pointer border-none"
               :class="locale === 'es' ? 'bg-accent-green text-ink' : 'bg-transparent text-text-muted hover:text-text-primary'"
               aria-label="Español"
             >ES</button>
             <button
+              type="button"
               @click="locale !== 'en' && changeLanguage()"
               class="px-2 py-1 transition-colors cursor-pointer border-none"
               :class="locale === 'en' ? 'bg-accent-green text-ink' : 'bg-transparent text-text-muted hover:text-text-primary'"
@@ -74,6 +76,7 @@ const socialLinks = [
 
           <!-- Dark/light toggle -->
           <button
+            type="button"
             @click="toggleTheme"
             class="text-text-muted hover:text-accent-green transition-colors cursor-pointer bg-transparent border-none p-0 flex items-center"
             :aria-label="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"

@@ -1,11 +1,15 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useI18n } from 'vue-i18n'
 import BlueprintCard from '@/components/BlueprintCard.vue'
 import SectionHeader from '@/components/SectionHeader.vue'
 import NodeConnector from '@/components/NodeConnector.vue'
-
-const { t } = useI18n()
+import {
+  siN8n, siMake, siZoho, siAnthropic,
+  siVuedotjs, siTailwindcss, siQuasar,
+  siNodedotjs, siPython,
+  siPostgresql, siMongodb,
+  siDocker, siCloudflare,
+} from 'simple-icons'
 
 // Loading bar
 const loadBarWidth = ref(0)
@@ -35,12 +39,58 @@ const cases = [
 ]
 
 const stackCategories = [
-  { labelKey: 'stack.categories.automation', itemsKey: 'stack.items.automation' },
-  { labelKey: 'stack.categories.ai', itemsKey: 'stack.items.ai' },
-  { labelKey: 'stack.categories.backend', itemsKey: 'stack.items.backend' },
-  { labelKey: 'stack.categories.frontend', itemsKey: 'stack.items.frontend' },
-  { labelKey: 'stack.categories.databases', itemsKey: 'stack.items.databases' },
-  { labelKey: 'stack.categories.infra', itemsKey: 'stack.items.infra' },
+  {
+    labelKey: 'stack.categories.automation',
+    items: [
+      { name: 'n8n', icon: siN8n },
+      { name: 'Make', icon: siMake },
+      { name: 'Zoho CRM', icon: siZoho },
+      { name: 'Zoho Catalyst', icon: null },
+      { name: 'Zoho Books', icon: null },
+    ],
+  },
+  {
+    labelKey: 'stack.categories.ai',
+    items: [
+      { name: 'Claude API', icon: siAnthropic },
+      { name: 'OpenAI API', icon: null },
+    ],
+  },
+  {
+    labelKey: 'stack.categories.backend',
+    items: [
+      { name: 'Node.js', icon: siNodedotjs },
+      { name: 'Python', icon: siPython },
+      { name: 'COQL', icon: null },
+      { name: 'Deluge', icon: null },
+    ],
+  },
+  {
+    labelKey: 'stack.categories.frontend',
+    items: [
+      { name: 'Vue 3', icon: siVuedotjs },
+      { name: 'PrimeVue 4', icon: null },
+      { name: 'Tailwind 4', icon: siTailwindcss },
+      { name: 'Quasar', icon: siQuasar },
+    ],
+  },
+  {
+    labelKey: 'stack.categories.databases',
+    items: [
+      { name: 'PostgreSQL', icon: siPostgresql },
+      { name: 'MongoDB', icon: siMongodb },
+    ],
+  },
+  {
+    labelKey: 'stack.categories.infra',
+    items: [
+      { name: 'Docker', icon: siDocker },
+      { name: 'Cloudflare', icon: siCloudflare },
+      { name: 'VPS', icon: null },
+      { name: 'Zoho Functions', icon: siZoho },
+      { name: 'API Gateway', icon: null },
+    ],
+  },
 ]
 </script>
 
@@ -299,13 +349,20 @@ const stackCategories = [
           <span class="font-mono text-caption tracking-eyebrow uppercase text-accent-green border-b border-grid-line pb-1">
             {{ $t(cat.labelKey) }}
           </span>
-          <ul class="list-none m-0 p-0 flex flex-col gap-1">
+          <ul class="list-none m-0 p-0 flex flex-col gap-1.5">
             <li
-              v-for="item in $tm(cat.itemsKey)"
-              :key="item"
-              class="font-sans text-caption text-text-muted"
+              v-for="item in cat.items"
+              :key="item.name"
+              class="font-sans text-caption text-text-muted flex items-center gap-1.5"
             >
-              {{ item }}
+              <svg
+                v-if="item.icon"
+                viewBox="0 0 24 24"
+                class="w-3 h-3 shrink-0 fill-current opacity-50"
+                aria-hidden="true"
+              ><path :d="item.icon.path" /></svg>
+              <span v-else class="w-3 h-3 shrink-0 inline-block" />
+              {{ item.name }}
             </li>
           </ul>
         </div>
