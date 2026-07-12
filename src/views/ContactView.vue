@@ -1,116 +1,216 @@
 <script setup>
-import { ref } from 'vue';
-import { useToast } from 'primevue/usetoast';
+import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+import SectionHeader from '@/components/SectionHeader.vue'
+import BlueprintCard from '@/components/BlueprintCard.vue'
 
-const toast = useToast();
+const { t, tm } = useI18n()
 
+const form = ref({ name: '', email: '', subject: '', message: '' })
+const touched = ref({ name: false, email: false, subject: false, message: false })
+const submitting = ref(false)
+const notification = ref(null)
 
-const textArea = ref('');
-const mailValue = ref('');
-const nameValue = ref('');
+const isValidEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
 
-const validateFields = () => {
-      if (mailValue.value.includes('@') && textArea.value !== '') {
-        return true
-      } else {
-        return false
-      }
-};
+const errors = computed(() => ({
+  email: touched.value.email && !isValidEmail(form.value.email),
+  message: touched.value.message && form.value.message.trim() === '',
+}))
 
-const validarYEnviar = () => {
-      if (validateFields()) {
-        fetch('https://formspree.io/f/xdoqzjob', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            mail: mailValue.value,
-            texto: textArea.value,
-            name: nameValue.value,
-          }),
-        })
-        .then(response => {
-          if (response.ok) {
-            // Maneja la respuesta exitosa
-            toast.add({severity:'success', summary: 'Muchas gracias', detail: 'Formulario enviado con éxito', group: 'br', life: 3000})
-            mailValue.value = ''
-            textArea.value = ''
-            nameValue.value = ''
-          } else {
-            // Maneja los errores o la respuesta no exitosa
-            toast.add({severity:'Error', summary: 'Lo siento', detail: 'Hubo un error al procesar tu solicitud', group: 'br', life: 3000})
-          }
-        })
-      } else {
-        // Manejo de error, por ejemplo, mostrando un mensaje al usuario
-        toast.add({severity:'Warn', summary: 'Hubo un problema', detail: 'Por favor, verifica los campos', group: 'br', life: 3000})
-      }
-};
+const onBlur = (field) => { touched.value[field] = true }
 
+const subjects = computed(() => tm('contact.subjects'))
+
+const showNotif = (type, text) => {
+  notification.value = { type, text }
+  setTimeout(() => { notification.value = null }, type === 'success' ? 4000 : 6000)
+}
+
+const submit = async () => {
+  Object.keys(touched.value).forEach(k => { touched.value[k] = true })
+  if (!isValidEmail(form.value.email) || !form.value.message.trim()) return
+
+  submitting.value = true
+  try {
+    const res = await fetch('https://formspree.io/f/xdoqzjob', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: form.value.name,
+        email: form.value.email,
+        subject: form.value.subject,
+        message: form.value.message,
+      }),
+    })
+    if (res.ok) {
+      showNotif('success', t('contact.toast.success'))
+      form.value = { name: '', email: '', subject: '', message: '' }
+      Object.keys(touched.value).forEach(k => { touched.value[k] = false })
+    } else {
+      showNotif('error', t('contact.toast.error'))
+    }
+  } catch {
+    showNotif('error', t('contact.toast.error'))
+  } finally {
+    submitting.value = false
+  }
+}
+
+const socialLinks = [
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/mjmartel/' },
+  { label: 'GitHub', href: 'https://github.com/D-Maledicte' },
+  { label: 'Mail', href: 'mailto:matiasjesusmartel@outlook.es' },
+]
 </script>
 
 <template>
-  <main class="flex flex-column justify-content-around">
-    <Toast position="bottom-right" group="br"></Toast>
-      <ScrollPanel class="lg:w-8 w-full h-full">
-        <div class="flex flex-column justify-content-between gap-4">
-        <Panel class="bg-white-alpha-10 panel">
-          <template #header>
-            <div class="flex flex-row align-items-center justify-content-between gap-2 w-full">
-              <div class="flex flew-row align-items-center">
-                  <i class="pi pi-hashtag m-2 text-xl text-primary"/>
-                  <span class="font-bold text-3xl hover:text-primary">{{$t('navBar[3]')}}</span>
-              </div>
+  <div>
+
+    <!-- ── Page header ────────────────────────────────────────── -->
+    <section class="w-full pt-20 pb-10">
+      <div class="max-w-6xl mx-auto px-6">
+        <SectionHeader eyebrow="04" :title="$t('contact.sectionLabel')" titleTag="h1" class="mb-4" />
+        <p class="font-mono text-caption text-accent-green m-0">
+          {{ $t('contact.availability') }}
+        </p>
+      </div>
+    </section>
+
+    <!-- ── Content ────────────────────────────────────────────── -->
+    <section class="w-full pb-20">
+      <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-8 items-start">
+
+        <!-- Form card -->
+        <BlueprintCard>
+          <span class="font-mono text-caption tracking-eyebrow uppercase text-accent-green block mb-6">
+            // {{ $t('contact.text') }}
+          </span>
+
+          <form @submit.prevent="submit" novalidate class="flex flex-col gap-5">
+
+            <!-- Name -->
+            <div class="flex flex-col gap-1.5">
+              <label for="ct-name" class="font-mono text-caption text-text-muted">
+                {{ $t('contact.name') }}
+              </label>
+              <input
+                id="ct-name"
+                v-model="form.name"
+                type="text"
+                autocomplete="name"
+                class="bg-ink border border-grid-line text-text-primary font-sans text-body px-3 py-2 focus:border-accent-green focus:outline-none transition-colors"
+              />
             </div>
-          </template>
-          <template #footer>
-            <div class="flex flex-row justify-content-around align-items-center md:gap-0 gap-2">
-                <a href="https://www.linkedin.com/in/mjmartel/" target="_blank" class="w-auto text-primary no-underline">
-                  <Button label="LinkedIn =>" icon="pi pi-linkedin" rounded text class="" outlined />
-                </a>
-                <a href="https://github.com/D-Maledicte" target="_blank" class="w-auto text-primary no-underline">
-                  <Button label="Github =>" icon="pi pi-github" rounded text class="" outlined></Button>
-                </a>
-                <a href="mailto:martelmatiasjesus@gmail.com" target="_blank" class="w-auto text-primary no-underline">
-                  <Button label="Mail" icon="pi pi-envelope" rounded text outlined />
-                </a>
-              </div>
-          </template>
-          <Fieldset :legend="$t('contactView.legend')" class="w-full ">
-              <div class="w-full p-2 mt-2 flex flex-column gap-4">
-                <p>{{$t('contactView.text')}}</p>
-                <form @submit.prevent="validarYEnviar" class="w-full flex flex-column md:justify-content-center md:align-items-center gap-4">
-                  <FloatLabel>
-                    <InputText name="email" id="email" v-model="mailValue" :invalid="mailValue.includes('@') ? false : true"/>
-                    <label for="email">{{$t('contactView.mail')}}</label>
-                  </FloatLabel>
-                  <FloatLabel>
-                    <InputText name="name" id="username" type="text" v-model="nameValue"/>
-                    <label for="username">{{$t('contactView.name')}}</label>
-                  </FloatLabel>
-                  <Textarea name="texto" v-model="textArea" rows="5" cols="40" class="md:w-6 w-full" :placeholder="$t('contactView.textAreaPlaceholder')" :invalid="textArea !== '' ? false : true"/>
-                  <Button :label="$t('contactView.submit')" type="submit"/>
-                </form>
-              </div>
-            </Fieldset>
-        </Panel>
-        </div>
-        
-      </ScrollPanel> 
-  </main>
+
+            <!-- Email -->
+            <div class="flex flex-col gap-1.5">
+              <label for="ct-email" class="font-mono text-caption text-text-muted">
+                {{ $t('contact.email') }} *
+              </label>
+              <input
+                id="ct-email"
+                v-model="form.email"
+                type="email"
+                autocomplete="email"
+                @blur="onBlur('email')"
+                class="bg-ink text-text-primary font-sans text-body px-3 py-2 focus:outline-none transition-colors border"
+                :class="errors.email ? 'border-red-500 focus:border-red-500' : 'border-grid-line focus:border-accent-green'"
+              />
+              <span v-if="errors.email" class="font-mono text-caption text-red-400">
+                {{ $t('contact.fieldEmail') }}
+              </span>
+            </div>
+
+            <!-- Subject -->
+            <div class="flex flex-col gap-1.5">
+              <label for="ct-subject" class="font-mono text-caption text-text-muted">
+                {{ $t('contact.subject') }}
+              </label>
+              <select
+                id="ct-subject"
+                v-model="form.subject"
+                class="bg-ink border border-grid-line text-text-primary font-mono text-caption px-3 py-2 focus:border-accent-green focus:outline-none transition-colors appearance-none cursor-pointer"
+              >
+                <option value="" disabled>{{ $t('contact.subjectPlaceholder') }}</option>
+                <option v-for="s in subjects" :key="s" :value="s">{{ s }}</option>
+              </select>
+            </div>
+
+            <!-- Message -->
+            <div class="flex flex-col gap-1.5">
+              <label for="ct-message" class="font-mono text-caption text-text-muted">
+                {{ $t('contact.message') }} *
+              </label>
+              <textarea
+                id="ct-message"
+                v-model="form.message"
+                rows="5"
+                @blur="onBlur('message')"
+                :placeholder="$t('contact.placeholders.message')"
+                class="bg-ink text-text-primary font-sans text-body px-3 py-2 focus:outline-none transition-colors resize-y border"
+                :class="errors.message ? 'border-red-500 focus:border-red-500' : 'border-grid-line focus:border-accent-green'"
+              />
+              <span v-if="errors.message" class="font-mono text-caption text-red-400">
+                {{ $t('contact.fieldRequired') }}
+              </span>
+            </div>
+
+            <!-- Submit -->
+            <button
+              type="submit"
+              :disabled="submitting"
+              class="font-mono text-caption tracking-eyebrow uppercase px-5 py-2.5 bg-accent-green text-ink hover:opacity-90 transition-opacity disabled:opacity-50 cursor-pointer border-none w-fit"
+            >
+              {{ submitting ? '...' : $t('contact.submit') }} →
+            </button>
+
+          </form>
+        </BlueprintCard>
+
+        <!-- Right: Social links -->
+        <BlueprintCard>
+          <span class="font-mono text-caption tracking-eyebrow uppercase text-accent-green block mb-4">
+            // social
+          </span>
+          <div class="flex flex-col gap-3">
+            <a
+              v-for="link in socialLinks"
+              :key="link.label"
+              :href="link.href"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-mono text-caption text-text-muted hover:text-accent-green transition-colors no-underline"
+            >
+              {{ link.label }} →
+            </a>
+          </div>
+        </BlueprintCard>
+
+      </div>
+    </section>
+
+    <!-- ── Notification ───────────────────────────────────────── -->
+    <Transition name="fade">
+      <div
+        v-if="notification"
+        class="fixed bottom-6 right-6 z-50 max-w-sm border font-mono text-caption px-4 py-3 bg-surface"
+        :class="notification.type === 'success' ? 'border-accent-green text-accent-green' : 'border-red-400 text-red-400'"
+      >
+        {{ notification.text }}
+      </div>
+    </Transition>
+
+  </div>
 </template>
 
 <style scoped>
-:deep(.p-panel .p-panel-content) {
-  padding: 0 1.125rem 0.50rem 1.125rem;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
 }
-
-.panel {
-  height: auto;
-}
-
-.stickyPanel{
-  height: 2px;
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
