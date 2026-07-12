@@ -1,7 +1,7 @@
 {
   "global": {
     "webName": "DMaledicte",
-    "copyright": "Todos los derechos reservados 2025",
+    "copyright": "Todos los derechos reservados 2026",
     "downloadCv": "Descargar CV",
     "cvDownloaded": "CV descargado",
     "cvThanks": "Gracias por revisar mi perfil",
@@ -53,14 +53,6 @@
       "backend": "Backend",
       "databases": "Databases",
       "infra": "Infra / VPS"
-    },
-    "items": {
-      "automation": ["n8n", "Make", "Zoho CRM", "Zoho Catalyst", "Zoho Books"],
-      "ai": ["Claude API", "OpenAI API"],
-      "frontend": ["Vue 3", "PrimeVue 4", "Tailwind 4", "Quasar"],
-      "backend": ["Node.js", "Python", "COQL", "Deluge"],
-      "databases": ["PostgreSQL", "MongoDB"],
-      "infra": ["Docker", "Cloudflare", "VPS", "Zoho Functions", "API Gateway"]
     }
   },
   "cases": {
@@ -135,6 +127,7 @@
     "sectionLabel": "Sobre mí",
     "availability": "Disponible para proyectos de integración y automatización.",
     "photoLabel": "foto de perfil",
+    "photoAlt": "Matias Martel — Ingeniero de automatización e integraciones",
     "bio": {
       "p1": "Ingeniero de automatización e integraciones con ownership técnico sobre ecosistemas CRM/ERP completos. Diseño arquitectura — CQRS, hexagonal, idempotencia, reconciliación — y ejecuto desde la integración hasta el despliegue.",
       "p2": "Mis áreas de mayor profundidad son la automatización de flujos críticos de negocio, la separación de responsabilidades entre plataformas — CRM como system of record, data stores cloud como capa de lectura — y el diseño de tooling interno que reduce la dependencia del conocimiento tácito. Prefiero sistemas que el equipo pueda auditar, versionar y extender por su cuenta.",

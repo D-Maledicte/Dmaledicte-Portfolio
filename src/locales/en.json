@@ -1,7 +1,7 @@
 {
   "global": {
     "webName": "DMaledicte",
-    "copyright": "All rights reserved 2025",
+    "copyright": "All rights reserved 2026",
     "downloadCv": "Download CV",
     "cvDownloaded": "CV downloaded",
     "cvThanks": "Thanks for checking out my profile",
@@ -53,14 +53,6 @@
       "backend": "Backend",
       "databases": "Databases",
       "infra": "Infra / VPS"
-    },
-    "items": {
-      "automation": ["n8n", "Make", "Zoho CRM", "Zoho Catalyst", "Zoho Books"],
-      "ai": ["Claude API", "OpenAI API"],
-      "frontend": ["Vue 3", "PrimeVue 4", "Tailwind 4", "Quasar"],
-      "backend": ["Node.js", "Python", "COQL", "Deluge"],
-      "databases": ["PostgreSQL", "MongoDB"],
-      "infra": ["Docker", "Cloudflare", "VPS", "Zoho Functions", "API Gateway"]
     }
   },
   "cases": {
@@ -135,6 +127,7 @@
     "sectionLabel": "About",
     "availability": "Available for integration and automation projects.",
     "photoLabel": "profile photo",
+    "photoAlt": "Matias Martel — Automation and integration engineer",
     "bio": {
       "p1": "Automation and integration engineer with full technical ownership of CRM/ERP ecosystems. I design architecture — CQRS, hexagonal, idempotency, reconciliation — and execute from integration design through deployment.",
       "p2": "My deepest areas are critical business flow automation, platform responsibility separation — CRM as system of record, cloud data stores as the read layer — and internal tooling design that reduces dependence on tacit knowledge. I prefer systems the team can audit, version, and extend on their own.",

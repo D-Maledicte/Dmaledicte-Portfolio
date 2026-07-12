@@ -1,35 +1,56 @@
-# Dmaledicte_Portfolio_PrimeVue
+# DMaledicte Portfolio — v2.0
 
-This template should help get you started developing with Vue 3 in Vite.
+Portfolio profesional de Matias Martel — ingeniero de automatización e integraciones, arquitectura CRM/ERP, self-hosted tooling y IA.
 
-## Recommended IDE Setup
+**URL:** [dmaledicte.cloud](https://dmaledicte.cloud)
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Stack
 
-## Customize configuration
+| Capa | Tecnología |
+|---|---|
+| Framework | Vue 3 + Vite 5 |
+| UI | PrimeVue 4 (unstyled) |
+| Estilos | Tailwind CSS 4 |
+| Tipografía | IBM Plex Sans + IBM Plex Mono (@fontsource) |
+| Iconos | PrimeIcons 7 + simple-icons |
+| i18n | vue-i18n 9 (ES / EN) |
+| Formulario | Formspree |
+| Deploy | Vercel → dmaledicte.cloud |
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Desarrollo local
 
-## Project Setup
-
-```sh
+```bash
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
+## Build
 
-```sh
+```bash
 npm run build
+npm run preview
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+## Estructura
 
-```sh
-npm run lint
 ```
+src/
+├── assets/          # tokens.css, fuentes, imágenes
+├── components/      # BlueprintCard, SectionHeader, NodeConnector
+├── composables/     # useTheme.js
+├── locales/         # es.json, en.json
+├── plugins/         # i18n.js
+├── router/          # index.js
+└── views/           # HomeView, ProjectsView, AboutView, ContactView
+```
+
+## Diseño
+
+Estética **blueprint técnica** — dark mode por defecto, light mode con papel blueprint (`#F4F2EE`).
+IBM Plex Mono para labels, eyebrows y código. IBM Plex Sans para body copy.
+Tokens centralizados en `src/assets/tokens.css`.
+
+## Casos de estudio
+
+Los casos están genericados — sin nombres de empresa ni lógica de negocio identificable.
+Representan patrones de arquitectura: CQRS multi-tenant, migración SaaS → self-hosted, AI tooling interno.

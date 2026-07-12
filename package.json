@@ -15,6 +15,7 @@
     "@fontsource/ibm-plex-sans": "^5.2.8",
     "primeicons": "^7.0.0",
     "primevue": "^4.5.5",
+    "simple-icons": "^16.25.0",
     "vue": "^3.4.15",
     "vue-i18n": "^9.9.1",
     "vue-router": "^4.2.5"
